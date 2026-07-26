@@ -4,7 +4,7 @@
 # BibTeX beautifier
 
 Beautify BibTeX files in the following way:
-- main feature: replaces entries using the ones from the ACM Digital Library (ACM DL) when they exist, otherwise keeps the original entry. It uses the entry DOI when it is available, otherwise it searches for the DOI using CrossRef.
+- main feature: replaces entries using the ones from the [ACM Digital Library (ACM DL)](https://dl.acm.org/) when they exist, otherwise keeps the original entry. It uses the entry DOI when it is available, otherwise it searches for the DOI using [CrossRef API](https://api.crossref.org/swagger-ui/index.html).
 - removes the fields specified by the user from the entries.
 - indents the entries in a consistent way.
 - removes unnecessary line breaks between the entries.
@@ -17,7 +17,7 @@ It preserves the original order of the entries in the BibTeX file and it also pr
 pip install bibb
 ```
 
-You also need to have Google Chrome and [node.js](https://nodejs.org/) installed. 
+You also need to have Google Chrome and [node.js](https://nodejs.org/) installed and available in your PATH.
 
 In Node.js, you need to install the `citeproc` package:
 
@@ -27,7 +27,7 @@ npm install citeproc
 
 ## Usage
 
-In order to use the ACM DL feature, you need to have a recent version of Google Chrome installed, and you need to start it with the remote debugging port enabled. You can do this by running the following command in a terminal (replace with the path to your Google Chrome installation if it is different):
+In order to use the ACM DL feature, you need to have Google Chrome installed, and you need to start it with the remote debugging port enabled. You can do this by running the following command in a terminal (replace with the path to your Google Chrome installation if it is different):
 
 ```bash
 /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 -user-data-dir="./ChromeProfile"
