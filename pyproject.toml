@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bibb"
+version = "0.1.0"
+description = "BibTeX beautifier."
+readme = "Readme.md"
+authors = [
+    { name = "Géry Casiez", email = "gery.casiez@univ-lille.fr" },
+]
+
+requires-python = ">=3.12"
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+
+dependencies = [
+    "requests",
+    "selenium",
+    "bibtexparser<2.0.0b2",
+    "tqdm"
+]
+
+[project.urls]
+Homepage = "https://github.com/casiez/bibb"
+
+[project.scripts]
+bibb = "bibb.bibb:main"
+
+[tool.setuptools.package-data]
+bibb = ["citeproc.js"]
+
