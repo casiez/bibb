@@ -124,7 +124,7 @@ def cleanBibEntry(entry):
     """
     for key in entry.keys():
         if isinstance(entry[key], str):
-            entry[key] = entry[key].replace("&amp;", "\\&")
+            entry[key] = entry[key].replace("&amp;", "\\&").replace("’", "'").replace("–", "--")
     return entry
 
 def getBibFromACM(bibinfo, source_entry, fieldsToRemove=None):
