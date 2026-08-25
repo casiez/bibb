@@ -118,6 +118,15 @@ def getBibEntryTxt(entry, fieldsToRemove=None):
         bib_db.entries[0].pop(field, None)
     return dumpBibPreserveOrder(bib_db)
 
+def cleanBibEntry(entry):
+    """
+        Clean up the BibTeX entry, replacing characters.
+    """
+    for key in entry.keys():
+        if isinstance(entry[key], str):
+            entry[key] = entry[key].replace("&amp;", "\\&")
+    return entry
+
 def getBibFromACM(bibinfo, source_entry, fieldsToRemove=None):
     """
         Convert ACM Digital Library bibliographic information to a BibTeX entry, preserving order and keywords.
@@ -136,6 +145,7 @@ def getBibFromACM(bibinfo, source_entry, fieldsToRemove=None):
         if fieldsToRemove:
             for field in fieldsToRemove:
                 bibentry.entries[0].pop(field, None)
+        bibentry.entries[0] = cleanBibEntry(bibentry.entries[0])
         return dumpBibPreserveOrder(bibentry)
     else:
         return None
@@ -145,9 +155,12 @@ def getBibEntryFromDOI(info, entry, fieldsToRemove=None):
     """
         Get the BibTeX entry from ACM Digital Library info if available, otherwise return the original entry."""
     if info is not None:
-        return getBibFromACM(info, entry, fieldsToRemove=fieldsToRemove)
+        res = getBibFromACM(info, entry, fieldsToRemove=fieldsToRemove)
+        if res is None:
+            res = getBibEntryTxt(entry, fieldsToRemove=fieldsToRemove)
     else:
-        return getBibEntryTxt(entry, fieldsToRemove=fieldsToRemove)
+        res = getBibEntryTxt(entry, fieldsToRemove=fieldsToRemove)
+    return res
 
 
 def main():
@@ -175,7 +188,8 @@ def main():
     try:
         response = requests.get("http://127.0.0.1:9222")
     except requests.RequestException:
-        print("Chrome is not running with remote debugging enabled")
+        print("Chrome is not running with remote debugging enabled.")
+        print("Go on https://github.com/casiez/bibb and follow the instructions.")
         sys.exit(1)
 
 
