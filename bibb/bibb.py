@@ -36,8 +36,9 @@ def getDOI(title):
     """
     #  There is a rate limit of 50 requests per second for the CrossRef API.
     time.sleep(1)
+    title = title.strip().replace(' ', '+').replace('&', '')
 
-    url = f"https://api.crossref.org/works?query.title={title.replace(' ', '+')}&select=DOI,title"
+    url = f"https://api.crossref.org/works?query.title={title}&select=DOI,title"
 
     result = requests.get(url)
     try:
